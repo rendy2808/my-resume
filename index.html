@@ -100,16 +100,26 @@
 
   .hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:120px 48px 80px;z-index:2;overflow:hidden}
 
-  .sentinel-frame{
+  .void-strike-frame{
     position:absolute;right:5%;top:50%;transform:translateY(-50%);
     width:min(540px, 44vw);aspect-ratio:1/1.15;z-index:1;pointer-events:none;opacity:.92;
-    animation:sentinelBreathe 5.5s ease-in-out infinite;
   }
-  @keyframes sentinelBreathe{
-    0%,100%{transform:translateY(-50%) scale(1);filter:drop-shadow(0 0 30px rgba(255,30,30,.2))}
-    50%{transform:translateY(calc(-50% - 6px)) scale(1.008);filter:drop-shadow(0 0 60px rgba(255,40,40,.45))}
+  @keyframes voidPulse{
+    0%,100%{filter:drop-shadow(0 0 20px rgba(255,30,30,.3));opacity:.85}
+    50%{filter:drop-shadow(0 0 50px rgba(255,60,60,.8));opacity:1}
   }
-  .sentinel-frame svg{width:100%;height:100%}
+  @keyframes voidStrike{
+    0%,100%{opacity:.4}
+    50%{opacity:1}
+  }
+  @keyframes shockwave{
+    0%{transform:scale(1);opacity:.9}
+    100%{transform:scale(3.5);opacity:0}
+  }
+  .void-strike-frame svg{width:100%;height:100%}
+  .void-strike-frame .vs-core{animation:voidPulse 2s ease-in-out infinite}
+  .void-strike-frame .vs-beam{animation:voidStrike 1.5s ease-in-out infinite}
+  .void-strike-frame .vs-shockwave{animation:shockwave 2s ease-out infinite;transform-box:fill-box;transform-origin:center}
 
   .red-glow-orb{
     position:absolute;right:18%;top:38%;width:600px;height:600px;
@@ -218,7 +228,7 @@
   }
   @media (max-width:900px){
     .hero{padding:110px 24px 80px}
-    .sentinel-frame, .red-glow-orb{display:none}
+    .void-strike-frame, .red-glow-orb{display:none}
     .hero-side{margin-top:48px}
   }
 
@@ -416,61 +426,78 @@
 <section class="hero">
   <div class="red-glow-orb"></div>
 
-  <div class="sentinel-frame">
+  <div class="void-strike-frame">
     <svg viewBox="0 0 400 460" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="helmShine" cx="50%" cy="30%">
-          <stop offset="0%" stop-color="#3a3d48"/>
-          <stop offset="60%" stop-color="#0e0f14"/>
-          <stop offset="100%" stop-color="#000"/>
-        </radialGradient>
-        <radialGradient id="visorGlow" cx="50%" cy="50%">
-          <stop offset="0%" stop-color="#ff6b3a"/>
-          <stop offset="40%" stop-color="#ff1a1a"/>
-          <stop offset="100%" stop-color="#3a0000"/>
-        </radialGradient>
-        <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#1a1c24"/>
-          <stop offset="100%" stop-color="#000"/>
-        </linearGradient>
-      </defs>
-      <path d="M 80 250 Q 50 340 75 460 L 325 460 Q 350 340 320 250 Q 200 280 80 250 Z" fill="#000" opacity=".95"/>
-      <path d="M 110 270 Q 95 340 115 440 L 285 440 Q 305 340 290 270 Q 200 295 110 270 Z" fill="url(#bodyGrad)" opacity=".7"/>
-      <path d="M 140 30 L 200 12 L 260 30 L 270 80 L 130 80 Z" fill="url(#helmShine)" stroke="#0a0b0f" stroke-width="1"/>
-      <path d="M 130 80 L 270 80 L 285 150 L 270 220 L 200 240 L 130 220 L 115 150 Z" fill="url(#helmShine)" stroke="#0a0b0f" stroke-width="1"/>
-      <path d="M 200 12 L 200 240" stroke="#2a2d38" stroke-width="2" opacity=".4"/>
-      <path d="M 130 80 L 200 240 L 270 80" stroke="#0a0b0f" stroke-width="1" fill="none" opacity=".5"/>
-      <rect x="135" y="135" width="130" height="22" rx="2" fill="#000"/>
-      <rect x="140" y="140" width="120" height="12" rx="1" fill="url(#visorGlow)" opacity=".95">
-        <animate attributeName="opacity" values=".55;1;.55" dur="2.5s" repeatCount="indefinite"/>
-      </rect>
-      <rect x="148" y="142" width="20" height="3" fill="#ffaa88" opacity=".6"/>
-      <rect x="232" y="142" width="20" height="3" fill="#ffaa88" opacity=".6"/>
-      <rect x="170" y="180" width="60" height="36" fill="#0a0b0f" stroke="#1a1c24"/>
-      <rect x="176" y="186" width="3" height="24" fill="#1a1c24"/>
-      <rect x="184" y="186" width="3" height="24" fill="#1a1c24"/>
-      <rect x="192" y="186" width="3" height="24" fill="#1a1c24"/>
-      <rect x="200" y="186" width="3" height="24" fill="#1a1c24"/>
-      <rect x="208" y="186" width="3" height="24" fill="#1a1c24"/>
-      <rect x="216" y="186" width="3" height="24" fill="#1a1c24"/>
-      <rect x="224" y="186" width="3" height="24" fill="#1a1c24"/>
-      <rect x="160" y="290" width="80" height="50" fill="#0a0b0f" stroke="#1a1c24" stroke-width="1"/>
-      <rect x="168" y="298" width="12" height="4" fill="#3aff66" opacity=".9">
-        <animate attributeName="opacity" values=".4;1;.4" dur="1.8s" repeatCount="indefinite"/>
-      </rect>
-      <rect x="184" y="298" width="12" height="4" fill="#ff1a1a" opacity=".9">
-        <animate attributeName="opacity" values=".5;1;.5" dur="1.2s" repeatCount="indefinite"/>
-      </rect>
-      <rect x="200" y="298" width="12" height="4" fill="#3aaeff" opacity=".9">
-        <animate attributeName="opacity" values=".4;1;.4" dur="2.2s" repeatCount="indefinite"/>
-      </rect>
-      <rect x="216" y="298" width="12" height="4" fill="#ffaa00" opacity=".9">
-        <animate attributeName="opacity" values=".5;1;.5" dur="1.5s" repeatCount="indefinite"/>
-      </rect>
-      <polygon points="200,318 208,322 208,330 200,334 192,330 192,322" fill="#ff1a1a" opacity=".7">
-        <animate attributeName="opacity" values=".4;.9;.4" dur="2s" repeatCount="indefinite"/>
-      </polygon>
-      <rect x="168" y="332" width="64" height="4" fill="#1a1c24"/>
+      <!-- starfield -->
+      <circle cx="28" cy="35" r="1" fill="#fff" opacity=".5"/>
+      <circle cx="85" cy="88" r="1.5" fill="#fff" opacity=".4"/>
+      <circle cx="355" cy="48" r="1" fill="#fff" opacity=".6"/>
+      <circle cx="318" cy="155" r="1" fill="#aaf" opacity=".5"/>
+      <circle cx="55" cy="195" r="1" fill="#fff" opacity=".3"/>
+      <circle cx="372" cy="295" r="1.5" fill="#fff" opacity=".4"/>
+      <circle cx="22" cy="345" r="1" fill="#fff" opacity=".45"/>
+      <circle cx="345" cy="395" r="1" fill="#ffd" opacity=".4"/>
+      <circle cx="115" cy="438" r="1" fill="#fff" opacity=".3"/>
+      <circle cx="282" cy="18" r="1" fill="#fff" opacity=".6"/>
+      <circle cx="150" cy="250" r="1" fill="#fff" opacity=".3"/>
+      <circle cx="330" cy="230" r="1" fill="#aaf" opacity=".4"/>
+      <circle cx="40" cy="290" r="1" fill="#fff" opacity=".35"/>
+      <circle cx="375" cy="130" r="1" fill="#fff" opacity=".5"/>
+      <!-- Galaga alien formation: row 1 — commanders -->
+      <g opacity=".9">
+        <polygon points="110,52 120,63 110,74 100,63" fill="#a30505"/>
+        <circle cx="110" cy="63" r="3" fill="#d4af37"/>
+        <polygon points="160,47 170,58 160,69 150,58" fill="#a30505"/>
+        <circle cx="160" cy="58" r="3" fill="#d4af37"/>
+        <polygon points="200,44 210,55 200,66 190,55" fill="#a30505"/>
+        <circle cx="200" cy="55" r="3" fill="#d4af37"/>
+        <polygon points="240,47 250,58 240,69 230,58" fill="#a30505"/>
+        <circle cx="240" cy="58" r="3" fill="#d4af37"/>
+        <polygon points="290,52 300,63 290,74 280,63" fill="#a30505"/>
+        <circle cx="290" cy="63" r="3" fill="#d4af37"/>
+      </g>
+      <!-- row 2 — elites -->
+      <g opacity=".85">
+        <polygon points="130,96 140,107 130,118 120,107" fill="#2a2d38" stroke="#666" stroke-width="1"/>
+        <circle cx="130" cy="107" r="3" fill="#ff1a1a"/>
+        <polygon points="175,92 185,103 175,114 165,103" fill="#2a2d38" stroke="#666" stroke-width="1"/>
+        <circle cx="175" cy="103" r="3" fill="#ff1a1a"/>
+        <polygon points="200,90 210,101 200,112 190,101" fill="#2a2d38" stroke="#666" stroke-width="1"/>
+        <circle cx="200" cy="101" r="3" fill="#ff1a1a"/>
+        <polygon points="225,92 235,103 225,114 215,103" fill="#2a2d38" stroke="#666" stroke-width="1"/>
+        <circle cx="225" cy="103" r="3" fill="#ff1a1a"/>
+        <polygon points="270,96 280,107 270,118 260,107" fill="#2a2d38" stroke="#666" stroke-width="1"/>
+        <circle cx="270" cy="107" r="3" fill="#ff1a1a"/>
+      </g>
+      <!-- row 3 — drones -->
+      <g opacity=".8">
+        <polygon points="150,137 162,157 138,157" fill="#1a1c24" stroke="#666" stroke-width="1"/>
+        <circle cx="150" cy="151" r="3" fill="#ff1a1a"/>
+        <polygon points="185,133 197,153 173,153" fill="#1a1c24" stroke="#666" stroke-width="1"/>
+        <circle cx="185" cy="147" r="3" fill="#ff1a1a"/>
+        <polygon points="215,133 227,153 203,153" fill="#1a1c24" stroke="#666" stroke-width="1"/>
+        <circle cx="215" cy="147" r="3" fill="#ff1a1a"/>
+        <polygon points="250,137 262,157 238,157" fill="#1a1c24" stroke="#666" stroke-width="1"/>
+        <circle cx="250" cy="151" r="3" fill="#ff1a1a"/>
+      </g>
+      <!-- impact glow -->
+      <circle cx="200" cy="185" r="30" fill="rgba(255,60,60,.12)"/>
+      <!-- shockwave ring -->
+      <circle class="vs-shockwave" cx="200" cy="185" r="22" fill="none" stroke="#ff5b3c" stroke-width="2.5"/>
+      <!-- beam glow (no class) -->
+      <rect x="194" y="185" width="12" height="230" fill="#ff1a1a" opacity=".12" rx="3"/>
+      <!-- attack beam -->
+      <rect class="vs-beam" x="197" y="185" width="6" height="230" fill="#ff2a2a" opacity=".7" rx="2"/>
+      <!-- player ship silhouette -->
+      <polygon points="200,418 228,445 172,445" fill="#cfc9bd"/>
+      <line x1="172" y1="445" x2="160" y2="440" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="228" y1="445" x2="240" y2="440" stroke="#aaa" stroke-width="1.5"/>
+      <polygon points="190,445 210,445 200,458" fill="#ff5b3c" opacity=".85"/>
+      <!-- core reactor (animated) -->
+      <g class="vs-core">
+        <circle cx="200" cy="430" r="8" fill="#ff1a1a"/>
+        <circle cx="200" cy="430" r="4" fill="#ff8866"/>
+      </g>
     </svg>
   </div>
 
