@@ -862,28 +862,36 @@
   .modal-overlay.active{opacity:1;pointer-events:all}
   .modal-card{
     width:min(900px,95vw);max-height:85vh;
-    background:linear-gradient(180deg,rgba(10,11,15,.98),rgba(5,6,10,.98));
-    border:1px solid rgba(255,42,42,.3);
-    box-shadow:0 0 60px rgba(255,30,30,.2), inset 0 0 40px rgba(255,30,30,.04);
+    background:rgba(8,9,12,.96);
+    border:1px solid rgba(255,42,42,.45);
+    box-shadow:0 0 80px rgba(255,30,30,.35), inset 0 0 60px rgba(255,30,30,.08);
     position:relative;overflow:auto;
     transform:translateY(30px);transition:transform .35s ease;
   }
   .modal-overlay.active .modal-card{transform:translateY(0)}
+  .modal-card::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,rgba(255,42,42,.06) 0%,transparent 40%,transparent 60%,rgba(255,42,42,.04) 100%);
+  }
   .modal-card::-webkit-scrollbar{width:6px}
   .modal-card::-webkit-scrollbar-thumb{background:rgba(255,42,42,.35);border-radius:3px}
   .modal-close{
     position:sticky;top:0;float:right;
-    margin:14px 14px 0 0;width:34px;height:34px;
-    background:transparent;border:1px solid rgba(207,201,189,.25);
-    color:var(--bone);font-size:15px;display:flex;align-items:center;justify-content:center;
+    margin:14px 14px 0 0;width:36px;height:36px;
+    background:rgba(0,0,0,.6);border:1px solid var(--ember);
+    color:var(--ember);font-size:16px;display:flex;align-items:center;justify-content:center;
     transition:all .25s;z-index:5;
+    box-shadow:0 0 12px rgba(255,42,42,.3);
   }
   .modal-close:hover{background:var(--ember);color:var(--void);border-color:var(--ember)}
-  .modal-content{padding:0 48px 48px}
-  .modal-content .section-heading{margin-bottom:40px;margin-top:0}
+  .modal-content{padding:0 48px 48px;position:relative;z-index:1}
+  .modal-content .section-heading{margin-bottom:40px;margin-top:0;color:var(--bone)}
+  .modal-content .section-label{color:var(--ember)}
   .modal-content .stats-grid,
   .modal-content .skills-grid,
   .modal-content .timeline{max-width:100%}
+  .modal-content p,.modal-content li{color:rgba(207,201,189,.9)}
+  .modal-content strong{color:var(--bone)}
 
   #intro-hud{
     position:fixed;top:90px;left:50%;transform:translateX(-50%);
