@@ -796,8 +796,14 @@
   }
   .player-spotlight{
     position:absolute;left:50%;top:50%;width:220px;height:220px;transform:translate(-50%,-50%);
-    background:radial-gradient(circle, rgba(255,255,255,.05) 0%, rgba(255,42,42,.03) 30%, transparent 60%);
+    background:radial-gradient(circle, rgba(255,255,255,.06) 0%, rgba(255,42,42,.04) 30%, transparent 60%);
     pointer-events:none;z-index:-2;animation:spotPulse 3s ease-in-out infinite;
+  }
+  .player-light{
+    position:absolute;width:500px;height:500px;border-radius:50%;transform:translate(-50%,-50%);
+    background:radial-gradient(circle, rgba(255,255,255,.10) 0%, rgba(255,42,42,.06) 25%, rgba(5,5,8,.25) 50%, transparent 70%);
+    pointer-events:none;z-index:5;transition:left .08s linear,top .08s linear;
+    mix-blend-mode:screen;
   }
   @keyframes glowPulse{0%,100%{opacity:.7;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}}
   @keyframes spotPulse{0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.1)}}
@@ -1139,6 +1145,7 @@
     <div class="game-world" id="game-world">
       <div class="world-grid"></div>
       <div class="world-hex"></div>
+      <div class="player-light" id="player-light"></div>
 
       <div class="world-prop world-crater" style="left:18%;top:22%"></div>
       <div class="world-prop world-crater" style="left:72%;top:68%;width:160px;height:90px"></div>
@@ -1180,36 +1187,36 @@
         <div class="player-spotlight"></div>
         <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <radialGradient id="rEye" cx="50%" cy="50%"><stop offset="0%" stop-color="#fff"/><stop offset="30%" stop-color="#ff5b3c"/><stop offset="100%" stop-color="#7a0000"/></radialGradient>
+            <radialGradient id="rEye" cx="50%" cy="50%"><stop offset="0%" stop-color="#fff"/><stop offset="30%" stop-color="#ff7a5b"/><stop offset="100%" stop-color="#7a0000"/></radialGradient>
             <filter id="robotBloom" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="2.5" result="blur"/>
+              <feGaussianBlur stdDeviation="3" result="blur"/>
               <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
             <filter id="outlineGlow">
-              <feGaussianBlur stdDeviation="1.5" result="blur"/>
+              <feGaussianBlur stdDeviation="2" result="blur"/>
               <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
           </defs>
-          <!-- body -->
-          <path d="M20 22h20v22H20z" fill="#3a3e4c" stroke="#c0c3d0" stroke-width="1.5" filter="url(#outlineGlow)"/>
-          <path d="M24 26h12v14H24z" fill="#1e212a"/>
+          <!-- bright body -->
+          <path d="M20 22h20v22H20z" fill="#5a5e6e" stroke="#e0e3f0" stroke-width="1.8" filter="url(#outlineGlow)"/>
+          <path d="M24 26h12v14H24z" fill="#2a2e3a"/>
           <!-- chest core -->
-          <rect x="27" y="30" width="6" height="8" rx="1" fill="#ff2a2a" filter="url(#robotBloom)">
-            <animate attributeName="opacity" values=".8;1;.8" dur="1s" repeatCount="indefinite"/>
+          <rect x="27" y="30" width="6" height="8" rx="1.5" fill="#ff2a2a" filter="url(#robotBloom)">
+            <animate attributeName="opacity" values=".85;1;.85" dur=".9s" repeatCount="indefinite"/>
           </rect>
           <!-- head -->
-          <path d="M22 10h16v16H22z" fill="#3a3e4c" stroke="#c0c3d0" stroke-width="1.5" filter="url(#outlineGlow)"/>
+          <path d="M22 10h16v16H22z" fill="#5a5e6e" stroke="#e0e3f0" stroke-width="1.8" filter="url(#outlineGlow)"/>
           <!-- visor -->
-          <rect x="24" y="14" width="12" height="6" rx="1" fill="url(#rEye)" filter="url(#robotBloom)"/>
-          <rect x="25" y="15" width="4" height="2" fill="#fff" opacity=".9"/>
+          <rect x="24" y="14" width="12" height="6" rx="1.5" fill="url(#rEye)" filter="url(#robotBloom)"/>
+          <rect x="25" y="15" width="4" height="2" fill="#fff" opacity=".95"/>
           <!-- arms -->
-          <path d="M16 26h4v14h-4z" fill="#3a3e4c" stroke="#c0c3d0" stroke-width="1.5" filter="url(#outlineGlow)"/>
-          <path d="M40 26h4v14h-4z" fill="#3a3e4c" stroke="#c0c3d0" stroke-width="1.5" filter="url(#outlineGlow)"/>
+          <path d="M16 26h4v14h-4z" fill="#5a5e6e" stroke="#e0e3f0" stroke-width="1.8" filter="url(#outlineGlow)"/>
+          <path d="M40 26h4v14h-4z" fill="#5a5e6e" stroke="#e0e3f0" stroke-width="1.8" filter="url(#outlineGlow)"/>
           <!-- legs -->
-          <path d="M23 44h4v10h-4z" fill="#3a3e4c" stroke="#c0c3d0" stroke-width="1.5" filter="url(#outlineGlow)"/>
-          <path d="M33 44h4v10h-4z" fill="#3a3e4c" stroke="#c0c3d0" stroke-width="1.5" filter="url(#outlineGlow)"/>
+          <path d="M23 44h4v10h-4z" fill="#5a5e6e" stroke="#e0e3f0" stroke-width="1.8" filter="url(#outlineGlow)"/>
+          <path d="M33 44h4v10h-4z" fill="#5a5e6e" stroke="#e0e3f0" stroke-width="1.8" filter="url(#outlineGlow)"/>
           <!-- thruster -->
-          <path class="robot-thruster" d="M26 54h8l-4 12z" fill="#ff7a55" filter="url(#robotBloom)"/>
+          <path class="robot-thruster" d="M26 54h8l-4 14z" fill="#ff9a75" filter="url(#robotBloom)"/>
         </svg>
       </div>
     </div>
@@ -1534,9 +1541,11 @@
     const y = clamp(vh/2 - py, -H + vh, 0);
     world.style.transform = `translate(${x}px, ${y}px)`;
   }
+  const playerLight = document.getElementById('player-light');
   function updatePlayer(){
     player.style.left = px + 'px';
     player.style.top = py + 'px';
+    if(playerLight){ playerLight.style.left = px + 'px'; playerLight.style.top = py + 'px'; }
     let dx = 0, dy = 0;
     if(keys['ArrowUp'] || keys['w'] || keys['W']) dy -= 1;
     if(keys['ArrowDown'] || keys['s'] || keys['S']) dy += 1;
