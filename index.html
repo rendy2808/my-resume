@@ -696,8 +696,7 @@
   .game-world{
     position:absolute;
     width:3000px;height:2000px;
-    left:50%;top:50%;
-    transform:translate(-50%,-50%);
+    left:0;top:0;
     background:
       radial-gradient(circle at 50% 45%, rgba(40,15,20,.55) 0%, rgba(15,8,12,.35) 25%, rgba(5,5,8,.55) 55%, #000 80%),
       radial-gradient(circle at 30% 70%, rgba(163,5,5,.18) 0%, transparent 35%),
@@ -788,7 +787,7 @@
   .robot-thruster{opacity:.9;animation:thruster .1s steps(2) infinite alternate}
   @keyframes thruster{from{opacity:.6}to{opacity:1}}
   .robot-bob{animation:bob 2s ease-in-out infinite}
-  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+  @keyframes bob{0%,100%{transform:translate(-50%,-50%) translateY(0)}50%{transform:translate(-50%,-50%) translateY(-3px)}}
   .player-glow{
     position:absolute;left:50%;top:50%;width:160px;height:160px;transform:translate(-50%,-50%);
     background:radial-gradient(circle, rgba(255,42,42,.28) 0%, rgba(255,42,42,.08) 40%, transparent 70%);
