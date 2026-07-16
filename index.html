@@ -699,17 +699,26 @@
     left:50%;top:50%;
     transform:translate(-50%,-50%);
     background:
-      radial-gradient(circle at 50% 50%, #0a0a14 0%, #000 60%);
-    border:1px solid rgba(255,42,42,.08);
-    box-shadow:0 0 100px rgba(255,30,30,.08), inset 0 0 120px rgba(0,0,0,.8);
+      radial-gradient(circle at 50% 45%, rgba(40,15,20,.55) 0%, rgba(15,8,12,.35) 25%, rgba(5,5,8,.55) 55%, #000 80%),
+      radial-gradient(circle at 30% 70%, rgba(163,5,5,.18) 0%, transparent 35%),
+      radial-gradient(circle at 80% 20%, rgba(58,170,255,.08) 0%, transparent 30%);
+    border:1px solid rgba(255,42,42,.22);
+    box-shadow:0 0 140px rgba(255,30,30,.18), inset 0 0 160px rgba(0,0,0,.5);
   }
   .world-grid{
     position:absolute;inset:0;pointer-events:none;
     background-image:
-      linear-gradient(rgba(255,42,42,.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,42,42,.04) 1px, transparent 1px);
-    background-size:60px 60px;
-    opacity:.25;
+      linear-gradient(rgba(255,42,42,.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,42,42,.12) 1px, transparent 1px);
+    background-size:80px 80px;
+    opacity:.35;
+  }
+  .world-grid::after{
+    content:"";position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,42,42,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,42,42,.06) 1px, transparent 1px);
+    background-size:400px 400px;
   }
   .world-hex{
     position:absolute;inset:0;pointer-events:none;opacity:.04;
@@ -723,35 +732,37 @@
     pointer-events:auto;cursor:none;
   }
   .sector-node .node-ring{
-    width:110px;height:110px;border-radius:50%;
-    border:1px solid rgba(255,42,42,.35);
+    width:120px;height:120px;border-radius:50%;
+    border:2px solid rgba(255,42,42,.55);
     display:flex;align-items:center;justify-content:center;
-    background:rgba(10,11,15,.7);
-    box-shadow:0 0 30px rgba(255,42,42,.1), inset 0 0 30px rgba(255,42,42,.03);
+    background:rgba(10,11,15,.85);
+    box-shadow:0 0 40px rgba(255,42,42,.25), inset 0 0 40px rgba(255,42,42,.08);
     transition:all .3s ease;
     position:relative;
   }
   .sector-node:hover .node-ring,
   .sector-node.near .node-ring{
     border-color:var(--ember);
-    box-shadow:0 0 50px rgba(255,42,42,.35), inset 0 0 40px rgba(255,42,42,.08);
-    transform:scale(1.08);
+    box-shadow:0 0 70px rgba(255,42,42,.55), inset 0 0 50px rgba(255,42,42,.15);
+    transform:scale(1.1);
   }
   .sector-node .node-icon{
-    width:52px;height:52px;color:var(--bone);
+    width:54px;height:54px;color:var(--bone);
     transition:transform .3s ease;
+    filter:drop-shadow(0 0 8px rgba(255,42,42,.35));
   }
   .sector-node:hover .node-icon,
-  .sector-node.near .node-icon{transform:scale(1.1);color:var(--ember)}
+  .sector-node.near .node-icon{transform:scale(1.12);color:var(--ember)}
   .sector-node .node-label{
-    font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:.25em;
-    color:rgba(207,201,189,.6);text-transform:uppercase;
-    background:rgba(0,0,0,.65);padding:6px 12px;border:1px solid rgba(255,42,42,.15);
+    font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:.25em;
+    color:rgba(207,201,189,.85);text-transform:uppercase;
+    background:rgba(0,0,0,.75);padding:7px 14px;border:1px solid rgba(255,42,42,.35);
     transition:all .3s ease;white-space:nowrap;
+    box-shadow:0 0 12px rgba(255,42,42,.15);
   }
   .sector-node:hover .node-label,
   .sector-node.near .node-label{
-    color:var(--bone);border-color:var(--ember);box-shadow:0 0 16px rgba(255,42,42,.25);
+    color:var(--bone);border-color:var(--ember);box-shadow:0 0 24px rgba(255,42,42,.4);
   }
   .node-particles{
     position:absolute;inset:-30px;pointer-events:none;border-radius:50%;
@@ -767,26 +778,39 @@
 
   #player-robot{
     position:absolute;left:0;top:0;z-index:30;
-    width:56px;height:56px;
+    width:64px;height:64px;
     transform:translate(-50%,-50%);
-    filter:drop-shadow(0 0 12px rgba(255,42,42,.35));
+    filter:drop-shadow(0 0 18px rgba(255,42,42,.65)) drop-shadow(0 0 40px rgba(255,42,42,.35));
     transition:transform .08s linear;
     pointer-events:none;
   }
   #player-robot svg{width:100%;height:100%}
-  .robot-thruster{opacity:.7;animation:thruster .1s steps(2) infinite alternate}
-  @keyframes thruster{from{opacity:.4}to{opacity:1}}
+  .robot-thruster{opacity:.9;animation:thruster .1s steps(2) infinite alternate}
+  @keyframes thruster{from{opacity:.6}to{opacity:1}}
   .robot-bob{animation:bob 2s ease-in-out infinite}
   @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+  .player-glow{
+    position:absolute;left:50%;top:50%;width:160px;height:160px;transform:translate(-50%,-50%);
+    background:radial-gradient(circle, rgba(255,42,42,.28) 0%, rgba(255,42,42,.08) 40%, transparent 70%);
+    pointer-events:none;z-index:-1;animation:glowPulse 2.5s ease-in-out infinite;
+  }
+  .player-spotlight{
+    position:absolute;left:50%;top:50%;width:220px;height:220px;transform:translate(-50%,-50%);
+    background:radial-gradient(circle, rgba(255,255,255,.05) 0%, rgba(255,42,42,.03) 30%, transparent 60%);
+    pointer-events:none;z-index:-2;animation:spotPulse 3s ease-in-out infinite;
+  }
+  @keyframes glowPulse{0%,100%{opacity:.7;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}}
+  @keyframes spotPulse{0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.1)}}
 
   #interact-prompt{
-    position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);
+    position:fixed;left:50%;bottom:100px;transform:translateX(-50%) translateY(20px);
     z-index:60;pointer-events:none;opacity:0;
     transition:opacity .25s ease,transform .25s ease;
-    font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:.2em;
-    color:var(--bone);background:rgba(0,0,0,.8);border:1px solid var(--ember);
-    padding:10px 18px;box-shadow:0 0 20px rgba(255,42,42,.35);
-    display:flex;align-items:center;gap:10px;
+    font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:.2em;
+    color:var(--bone);background:rgba(0,0,0,.88);border:1px solid var(--ember);
+    padding:12px 22px;box-shadow:0 0 30px rgba(255,42,42,.55);
+    display:flex;align-items:center;gap:12px;
+    text-shadow:0 0 10px rgba(255,42,42,.5);
   }
   #interact-prompt.visible{opacity:1;transform:translateX(-50%) translateY(0)}
   .key-cap{
@@ -859,45 +883,48 @@
   #intro-hud{
     position:fixed;top:90px;left:50%;transform:translateX(-50%);
     z-index:55;pointer-events:none;text-align:center;
-    opacity:0;animation:introHud 6s ease forwards;
+    opacity:0;animation:introHud 8s ease forwards;
   }
   #intro-hud .intro-line{
-    font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:.3em;
-    color:var(--ember);text-transform:uppercase;
-    background:rgba(0,0,0,.65);border:1px solid rgba(255,42,42,.25);
-    padding:10px 20px;box-shadow:0 0 20px rgba(255,42,42,.15);
+    font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:.3em;
+    color:var(--bone);text-transform:uppercase;
+    background:rgba(0,0,0,.82);border:1px solid var(--ember);
+    padding:12px 24px;box-shadow:0 0 30px rgba(255,42,42,.4);
+    text-shadow:0 0 12px rgba(255,42,42,.5);
   }
   @keyframes introHud{0%{opacity:0;transform:translateX(-50%) translateY(-20px)}10%{opacity:1;transform:translateX(-50%) translateY(0)}80%{opacity:1;transform:translateX(-50%) translateY(0)}100%{opacity:0;transform:translateX(-50%) translateY(-20px)}}
 
   .world-prop{position:absolute;pointer-events:none;z-index:10;opacity:.6}
   .world-crater{
-    width:220px;height:120px;border-radius:50%;border:1px solid rgba(255,42,42,.08);
-    background:radial-gradient(circle at 30% 30%, rgba(255,42,42,.06), transparent 60%);
+    width:220px;height:120px;border-radius:50%;border:1px solid rgba(255,42,42,.18);
+    background:radial-gradient(circle at 30% 30%, rgba(255,42,42,.12), transparent 55%);
+    box-shadow:0 0 40px rgba(255,42,42,.08);
   }
   .data-tower{
-    width:4px;height:120px;background:linear-gradient(180deg,transparent,rgba(255,42,42,.45),transparent);
-    box-shadow:0 0 20px rgba(255,42,42,.25);
+    width:4px;height:120px;background:linear-gradient(180deg,transparent,rgba(255,42,42,.65),transparent);
+    box-shadow:0 0 30px rgba(255,42,42,.45);
   }
   .data-tower::after{
     content:"";position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);
     width:40px;height:8px;border-radius:50%;background:rgba(255,42,42,.12);
   }
   .pulse-beacon{
-    width:8px;height:8px;background:var(--ember);border-radius:50%;
-    box-shadow:0 0 12px var(--ember);animation:blink 2s ease-in-out infinite;
+    width:10px;height:10px;background:var(--ember);border-radius:50%;
+    box-shadow:0 0 18px var(--ember),0 0 36px var(--ember-glow);animation:blink 1.8s ease-in-out infinite;
   }
   .comms-array{
-    width:2px;height:80px;background:rgba(207,201,189,.25);position:relative;
+    width:2px;height:80px;background:rgba(207,201,189,.45);position:relative;
+    box-shadow:0 0 10px rgba(207,201,189,.2);
   }
   .comms-array::before,.comms-array::after{
-    content:"";position:absolute;left:50%;transform:translateX(-50%);width:60px;height:1px;background:rgba(207,201,189,.25);
+    content:"";position:absolute;left:50%;transform:translateX(-50%);width:60px;height:1px;background:rgba(207,201,189,.45);
   }
   .comms-array::before{top:10px}
   .comms-array::after{top:30px}
   .world-prop-label{
     position:absolute;left:50%;transform:translateX(-50%);bottom:-24px;
     font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em;
-    color:rgba(207,201,189,.3);white-space:nowrap;
+    color:rgba(207,201,189,.55);white-space:nowrap;
   }
 
   @media(max-width:768px){
@@ -1107,7 +1134,7 @@
 </div>
 
 
-<section id="world" class="game-stage" aria-label="Interactive resume hub">
+<section id="world" class="game-stage" aria-label="Interactive resume hub" style="position:fixed;inset:0;z-index:50;">
   <div id="game-stage">
     <div class="game-world" id="game-world">
       <div class="world-grid"></div>
@@ -1149,23 +1176,40 @@
       </div>
 
       <div id="player-robot" class="robot-bob">
+        <div class="player-glow"></div>
+        <div class="player-spotlight"></div>
         <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <radialGradient id="rEye" cx="50%" cy="50%"><stop offset="0%" stop-color="#ff6b6b"/><stop offset="100%" stop-color="#7a0000"/></radialGradient>
+            <radialGradient id="rEye" cx="50%" cy="50%"><stop offset="0%" stop-color="#fff"/><stop offset="30%" stop-color="#ff5b3c"/><stop offset="100%" stop-color="#7a0000"/></radialGradient>
+            <filter id="robotBloom" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="2.5" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="outlineGlow">
+              <feGaussianBlur stdDeviation="1.5" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
           </defs>
-          <path d="M20 22h20v22H20z" fill="#1a1c24" stroke="#555" stroke-width="1"/>
-          <path d="M24 26h12v14H24z" fill="#0a0b0f"/>
-          <rect x="27" y="30" width="6" height="8" fill="rgba(255,42,42,.55)">
-            <animate attributeName="opacity" values=".4;1;.4" dur="1.4s" repeatCount="indefinite"/>
+          <!-- body -->
+          <path d="M20 22h20v22H20z" fill="#3a3e4c" stroke="#c0c3d0" stroke-width="1.5" filter="url(#outlineGlow)"/>
+          <path d="M24 26h12v14H24z" fill="#1e212a"/>
+          <!-- chest core -->
+          <rect x="27" y="30" width="6" height="8" rx="1" fill="#ff2a2a" filter="url(#robotBloom)">
+            <animate attributeName="opacity" values=".8;1;.8" dur="1s" repeatCount="indefinite"/>
           </rect>
-          <path d="M22 10h16v16H22z" fill="#1a1c24" stroke="#555" stroke-width="1"/>
-          <rect x="24" y="14" width="12" height="6" fill="url(#rEye)"/>
-          <rect x="25" y="15" width="4" height="2" fill="#ffbb99" opacity=".5"/>
-          <path d="M16 26h4v14h-4z" fill="#1a1c24" stroke="#555" stroke-width="1"/>
-          <path d="M40 26h4v14h-4z" fill="#1a1c24" stroke="#555" stroke-width="1"/>
-          <path d="M23 44h4v10h-4z" fill="#1a1c24" stroke="#555" stroke-width="1"/>
-          <path d="M33 44h4v10h-4z" fill="#1a1c24" stroke="#555" stroke-width="1"/>
-          <path class="robot-thruster" d="M26 54h8l-4 10z" fill="#ff5b3c"/>
+          <!-- head -->
+          <path d="M22 10h16v16H22z" fill="#3a3e4c" stroke="#c0c3d0" stroke-width="1.5" filter="url(#outlineGlow)"/>
+          <!-- visor -->
+          <rect x="24" y="14" width="12" height="6" rx="1" fill="url(#rEye)" filter="url(#robotBloom)"/>
+          <rect x="25" y="15" width="4" height="2" fill="#fff" opacity=".9"/>
+          <!-- arms -->
+          <path d="M16 26h4v14h-4z" fill="#3a3e4c" stroke="#c0c3d0" stroke-width="1.5" filter="url(#outlineGlow)"/>
+          <path d="M40 26h4v14h-4z" fill="#3a3e4c" stroke="#c0c3d0" stroke-width="1.5" filter="url(#outlineGlow)"/>
+          <!-- legs -->
+          <path d="M23 44h4v10h-4z" fill="#3a3e4c" stroke="#c0c3d0" stroke-width="1.5" filter="url(#outlineGlow)"/>
+          <path d="M33 44h4v10h-4z" fill="#3a3e4c" stroke="#c0c3d0" stroke-width="1.5" filter="url(#outlineGlow)"/>
+          <!-- thruster -->
+          <path class="robot-thruster" d="M26 54h8l-4 12z" fill="#ff7a55" filter="url(#robotBloom)"/>
         </svg>
       </div>
     </div>
