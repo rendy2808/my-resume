@@ -6,128 +6,206 @@
 <title>Rendytio Arifian Puspito — Resume</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
+    --ink: #0f172a;
+    --slate: #475569;
+    --muted: #64748b;
+    --accent: #0891b2;
+    --accent-glow: #06b6d4;
     --bg: #ffffff;
-    --text: #1a1a2e;
-    --text-secondary: #4a4a6a;
-    --accent: #2563eb;
-    --border: #e5e7eb;
-    --tag-bg: #f3f4f6;
+    --surface: #f8fafc;
+    --border: #e2e8f0;
+    --tag-bg: #f1f5f9;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #f8fafc;
-    color: var(--text);
-    line-height: 1.45;
+    background: #e2e8f0;
+    color: var(--ink);
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
-    display: flex;
-    justify-content: center;
-    padding: 20px;
+    display: flex; justify-content: center;
+    padding: 24px;
   }
   .page {
     width: 210mm; height: 297mm;
     background: var(--bg);
-    padding: 11mm 15mm 9mm;
-    box-shadow: 0 4px 24px rgba(0,0,0,.08);
+    padding: 10mm 15mm 7mm 15mm;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 8px 32px rgba(0,0,0,.08);
     display: flex; flex-direction: column;
-    gap: 3.2mm;
+    gap: 0;
+    position: relative;
+    overflow: hidden;
   }
+
+  /* ── Signature: vertical accent strip ── */
+  .page::before {
+    content: "";
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg,
+      var(--accent) 0%, var(--accent) 18%,
+      var(--border) 18%, var(--border) 20%,
+      var(--accent) 20%, var(--accent) 38%,
+      var(--border) 38%, var(--border) 40%,
+      var(--accent) 40%, var(--accent) 62%,
+      var(--border) 62%, var(--border) 64%,
+      var(--accent) 64%, var(--accent) 100%
+    );
+  }
+
   /* ── HEADER ── */
   .header {
     display: flex; justify-content: space-between; align-items: flex-start;
-    padding-bottom: 2.5mm;
-    border-bottom: 2px solid var(--accent);
+    padding: 0 0 3.5mm 5mm;
+    border-bottom: 1.5px solid var(--border);
+    margin-bottom: 3.5mm;
   }
   .header-left h1 {
-    font-size: 21pt; font-weight: 800; letter-spacing: -.02em;
-    color: var(--text); line-height: 1.08;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 21pt; font-weight: 700; letter-spacing: -.03em;
+    color: var(--ink); line-height: 1.05;
   }
   .header-left .role {
-    font-size: 9pt; font-weight: 600; color: var(--accent);
-    letter-spacing: .05em; text-transform: uppercase; margin-top: 1.5mm;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 8.5pt; font-weight: 500; color: var(--accent);
+    letter-spacing: .08em; text-transform: uppercase; margin-top: 1.5mm;
   }
   .header-right {
-    text-align: right; font-size: 8pt; color: var(--text-secondary);
-    line-height: 1.6; flex-shrink: 0;
+    text-align: right; font-size: 7.5pt; color: var(--muted);
+    line-height: 1.7; flex-shrink: 0; padding-top: 1mm;
   }
-  .header-right a { color: var(--text-secondary); text-decoration: none; }
-  .header-right .sep { color: var(--border); margin: 0 3px; }
+  .header-right a { color: var(--slate); text-decoration: none; font-weight: 500; }
+  .header-right .dot { color: var(--border); margin: 0 4px; }
 
   /* ── SECTIONS ── */
-  .section { display: flex; flex-direction: column; gap: 2mm; }
+  .section { padding-left: 5mm; margin-bottom: 3mm; }
   .section-title {
-    font-size: 8.5pt; font-weight: 700; text-transform: uppercase;
-    letter-spacing: .12em; color: var(--accent);
-    display: flex; align-items: center; gap: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 8pt; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .14em; color: var(--accent);
+    margin-bottom: 2mm; display: flex; align-items: center; gap: 9px;
   }
-  .section-title::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+  .section-title::after {
+    content: ""; flex: 1; height: 1px; background: var(--border);
+  }
+
+  /* ── SUMMARY ── */
   .summary-text {
-    font-size: 8.8pt; color: var(--text-secondary); line-height: 1.5;
+    font-size: 8.5pt; color: var(--slate); line-height: 1.55;
   }
+  .summary-text strong { color: var(--ink); }
 
   /* ── EXPERIENCE ── */
   .exp-item {
-    display: grid; grid-template-columns: 30mm 1fr; gap: 3.5mm;
-    padding-bottom: 2.5mm;
+    display: grid; grid-template-columns: 28mm 1fr; gap: 4mm;
+    padding-bottom: 2.2mm; position: relative;
   }
   .exp-item:not(:last-child) {
     border-bottom: 1px solid var(--border);
-    padding-bottom: 2.8mm; margin-bottom: 0.3mm;
+    margin-bottom: 2.2mm;
   }
   .exp-meta {
-    font-size: 7.5pt; color: var(--text-secondary); line-height: 1.45;
+    font-size: 7pt; color: var(--muted); line-height: 1.45;
   }
-  .exp-meta .company { font-weight: 700; font-size: 8.8pt; color: var(--text); display: block; }
+  .exp-meta .company {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; font-size: 9pt; color: var(--ink); display: block;
+  }
   .exp-meta .date {
-    display: block; margin-top: .3mm;
-    font-family: 'JetBrains Mono', monospace; font-size: 7pt; letter-spacing: .02em;
+    display: block; margin-top: .2mm;
+    font-family: 'JetBrains Mono', monospace; font-size: 6.8pt;
+    color: var(--muted);
   }
   .exp-body h3 {
-    font-size: 9.5pt; font-weight: 700; margin-bottom: 1.5mm; color: var(--text);
+    font-size: 9pt; font-weight: 700; margin-bottom: 1.2mm; color: var(--ink);
   }
   .exp-body ul { list-style: none; padding: 0; }
   .exp-body li {
-    font-size: 8.2pt; color: var(--text-secondary); line-height: 1.45;
-    padding-left: 10px; position: relative; margin-bottom: 0.8mm;
+    font-size: 7.8pt; color: var(--slate); line-height: 1.45;
+    padding-left: 10px; position: relative; margin-bottom: 0.5mm;
   }
   .exp-body li::before {
-    content: "▸"; position: absolute; left: 0; top: 0;
-    color: var(--accent); font-size: 6pt; line-height: 1.4;
+    content: "—"; position: absolute; left: 0; top: 0;
+    color: var(--accent); font-size: 6.5pt; line-height: 1.5;
   }
   .exp-body .award {
-    display: inline-block; font-size: 7pt; font-weight: 600;
-    color: #b45309; background: #fffbeb; border: 1px solid #fde68a;
-    padding: 1px 5px; border-radius: 3px; margin-bottom: 1.5mm;
+    display: inline-block; font-family: 'JetBrains Mono', monospace;
+    font-size: 6.2pt; font-weight: 500;
+    color: var(--accent); background: #ecfeff; border: 1px solid #a5f3fc;
+    padding: 1px 4px; border-radius: 2px; margin-bottom: 1.2mm;
+    letter-spacing: .04em;
   }
-  .tag-row { display: flex; flex-wrap: wrap; gap: 2.5px; margin-top: 1.5mm; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 2px; margin-top: 1.2mm; }
   .tag {
-    font-family: 'JetBrains Mono', monospace; font-size: 6.5pt;
+    font-family: 'JetBrains Mono', monospace; font-size: 6.2pt;
     padding: 1.5px 5px; background: var(--tag-bg);
-    border-radius: 3px; color: var(--text-secondary); letter-spacing: .02em;
+    border-radius: 2px; color: var(--slate); letter-spacing: .03em;
+    border: 1px solid transparent; transition: border-color .2s;
+  }
+
+  /* ── AI INTEGRATOR HIGHLIGHT ── */
+  .ai-highlight {
+    background: linear-gradient(135deg, rgba(8,145,178,.04) 0%, rgba(6,182,212,.02) 100%);
+    border: 1px solid rgba(8,145,178,.15);
+    border-left: 3px solid var(--accent);
+    padding: 2.5mm 3.5mm;
+    margin-left: 5mm;
+    margin-bottom: 3.5mm;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2.5mm;
+    position: relative;
+  }
+  .ai-highlight::after {
+    content: "AI INTEGRATOR";
+    position: absolute; top: -7px; right: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 6pt; letter-spacing: .2em;
+    color: var(--accent); background: var(--bg);
+    padding: 0 6px;
+  }
+  .ai-tool-card {
+    padding: 1.5mm 0;
+  }
+  .ai-tool-card .tool-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 8pt; font-weight: 700; color: var(--ink);
+    margin-bottom: 0.5mm;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .ai-tool-card .tool-name::before {
+    content: ""; display: inline-block;
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--accent); flex-shrink: 0;
+  }
+  .ai-tool-card .tool-desc {
+    font-size: 7pt; color: var(--slate); line-height: 1.4;
   }
 
   /* ── SKILLS ── */
-  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.2mm; }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2mm; }
   .skill-block h4 {
-    font-size: 7.5pt; font-weight: 600; text-transform: uppercase;
-    letter-spacing: .05em; color: var(--text); margin-bottom: 1mm;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 7pt; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .06em; color: var(--ink); margin-bottom: 0.8mm;
   }
   .skill-block p {
-    font-size: 7.8pt; color: var(--text-secondary); line-height: 1.45;
+    font-size: 7pt; color: var(--slate); line-height: 1.45;
+    font-family: 'JetBrains Mono', monospace;
   }
 
   /* ── PRINT ── */
   @page { margin: 0; }
   @media print {
     body { background: #fff; padding: 0; }
-    .page { box-shadow: none; width: 100%; height: auto; padding: 8mm 12mm 6mm; }
+    .page { box-shadow: none; width: 100%; height: auto; padding: 9mm 13mm 7mm 13mm; }
   }
   @media screen and (max-width: 800px) {
     .page { width: 100%; height: auto; padding: 8mm; }
-    .exp-item { grid-template-columns: 1fr; }
+    .exp-item, .ai-highlight { grid-template-columns: 1fr; }
     .skills-grid { grid-template-columns: 1fr 1fr; }
     .header { flex-direction: column; gap: 2mm; }
     .header-right { text-align: left; }
@@ -147,9 +225,9 @@
       <div>West Java, Indonesia · UTC+7</div>
       <div>
         <a href="mailto:rendytio.arifian@gmail.com">rendytio.arifian@gmail.com</a>
-        <span class="sep">|</span>
+        <span class="dot">·</span>
         <a href="https://github.com/rendy2808">github/rendy2808</a>
-        <span class="sep">|</span>
+        <span class="dot">·</span>
         <a href="https://linkedin.com/in/rendytio-arifian-puspito">linkedin</a>
       </div>
     </div>
@@ -157,20 +235,20 @@
 
   <!-- SUMMARY -->
   <div class="section">
-    <div class="section-title">Professional Summary</div>
+    <div class="section-title">Summary</div>
     <p class="summary-text">
-      Results-driven Software Engineer with <strong>7+ years</strong> of experience architecting backend systems across <strong>SaaS, F&amp;B retail, and on-demand logistics</strong>. Currently Person-In-Charge at Mekari, leading cross-functional initiatives from RFC to delivery. Proven track record delivering subscription platforms, real-time data sync pipelines, and marketplace systems at enterprise scale. <strong>AI integration specialist</strong> — orchestrating autonomous agents (Hermes, Claude Code, OpenCode) to accelerate development velocity.
+      Results-driven Software Engineer with <strong>7+ years</strong> of experience architecting backend systems across <strong>SaaS, F&amp;B retail, and on-demand logistics</strong>. Currently Person-In-Charge at Mekari, leading cross-functional initiatives from RFC authoring to production delivery. Proven track record delivering subscription platforms, real-time data sync pipelines, and marketplace systems at enterprise scale. <strong>AI integration specialist</strong> — embedding autonomous agents into engineering workflows to accelerate team velocity.
     </p>
   </div>
 
   <!-- EXPERIENCE -->
-  <div class="section">
+  <div class="section" style="margin-bottom:3.5mm;">
     <div class="section-title">Experience</div>
 
     <div class="exp-item">
       <div class="exp-meta">
         <span class="company">Mekari</span>
-        Jakarta, Indonesia
+        Jakarta
         <span class="date">Jan 2021 — Present</span>
       </div>
       <div class="exp-body">
@@ -181,12 +259,12 @@
           <li>Own the <strong>Data Sync Platform</strong> feeding CRM, customer engagement, and support systems with real-time event streams.</li>
           <li>Maintain the <strong>Partners &amp; Marketplace</strong> platform enabling third-party integrations and service discovery.</li>
           <li>Act as <strong>Person-In-Charge</strong> for cross-functional initiatives — RFC authoring, stakeholder alignment, task decomposition, multi-team delivery.</li>
-          <li>Lead <strong>AI integration</strong> — orchestrating agents via Hermes, authoring custom skills for Claude Code &amp; OpenCode adopted by the team.</li>
+          <li>Lead <strong>AI integration</strong> — authoring custom skills for Claude Code &amp; OpenCode adopted by the engineering team in production.</li>
         </ul>
         <div class="tag-row">
           <span class="tag">Ruby on Rails</span><span class="tag">Vue.js</span><span class="tag">MySQL</span>
           <span class="tag">MongoDB</span><span class="tag">Kafka</span><span class="tag">Redis</span>
-          <span class="tag">GraphQL</span><span class="tag">Hermes</span><span class="tag">Claude Code</span><span class="tag">OpenCode</span>
+          <span class="tag">GraphQL</span><span class="tag">Claude Code</span><span class="tag">OpenCode</span>
         </div>
       </div>
     </div>
@@ -194,14 +272,14 @@
     <div class="exp-item">
       <div class="exp-meta">
         <span class="company">Fore Coffee</span>
-        Jakarta, Indonesia
+        Jakarta
         <span class="date">Jan 2020 — Jan 2021</span>
       </div>
       <div class="exp-body">
         <h3>Backend Engineer — Mobile App &amp; Point-of-Sale</h3>
         <ul>
           <li>Built and maintained the <strong>core backend</strong> for Fore Coffee's mobile application and in-store POS infrastructure.</li>
-          <li>Integrated <strong>5+ payment gateways</strong> — Jenius, OVO, Midtrans (GoPay), ShopeePay, Xendit — ensuring reliable transactions at scale.</li>
+          <li>Integrated <strong>5+ payment gateways</strong> — Jenius, OVO, Midtrans (GoPay), ShopeePay, Xendit.</li>
         </ul>
         <div class="tag-row">
           <span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">MySQL</span>
@@ -213,15 +291,15 @@
     <div class="exp-item">
       <div class="exp-meta">
         <span class="company">Triplogic</span>
-        Jakarta, Indonesia
+        Jakarta
         <span class="date">Feb 2019 — Dec 2019</span>
       </div>
       <div class="exp-body">
         <h3>Backend Engineer — On-Demand Logistics</h3>
         <ul>
-          <li>Led and mentored <strong>3 Junior Backend Engineers</strong> — technical direction, code reviews, engineering best practices.</li>
+          <li>Led and mentored <strong>3 Junior Engineers</strong> — technical direction, code reviews, engineering best practices.</li>
           <li>Designed and shipped the core <strong>on-demand logistics platform</strong> backend.</li>
-          <li>Delivered dedicated backends for: coffee logistics (<strong>Fore Coffee</strong>), luggage delivery (<strong>Traveloka</strong>), and event locker services (<strong>YouTube Indonesia</strong>).</li>
+          <li>Delivered dedicated backends for: coffee logistics (<strong>Fore Coffee</strong>), luggage delivery (<strong>Traveloka</strong>), event locker (<strong>YouTube Indonesia</strong>).</li>
         </ul>
         <div class="tag-row">
           <span class="tag">Node.js</span><span class="tag">Python</span><span class="tag">Django</span>
@@ -231,8 +309,24 @@
     </div>
   </div>
 
+  <!-- AI INTEGRATOR HIGHLIGHT -->
+  <div class="ai-highlight">
+    <div class="ai-tool-card">
+      <div class="tool-name">Claude Code</div>
+      <div class="tool-desc">Authored production-grade custom skills — multi-agent task orchestration, test-case management, and video clipping pipelines. Adopted by the engineering team in daily workflows.</div>
+    </div>
+    <div class="ai-tool-card">
+      <div class="tool-name">OpenCode</div>
+      <div class="tool-desc">Integrated OpenCode CLI for autonomous delegated coding — PR review, feature development, and codebase refactoring via agent delegation with custom toolchains.</div>
+    </div>
+    <div class="ai-tool-card">
+      <div class="tool-name">Hermes Agent</div>
+      <div class="tool-desc">Configured and deployed Hermes as an autonomous engineering agent — multi-skill orchestration, cron automation, Telegram-native workflows, and cross-platform macOS integration.</div>
+    </div>
+  </div>
+
   <!-- SKILLS -->
-  <div class="section">
+  <div class="section" style="margin-bottom:0;">
     <div class="section-title">Technical Skills</div>
     <div class="skills-grid">
       <div class="skill-block">
@@ -240,15 +334,15 @@
         <p>Ruby, JavaScript, TypeScript, Python, SQL</p>
       </div>
       <div class="skill-block">
-        <h4>Backend Frameworks</h4>
-        <p>Ruby on Rails, Express.js, Node.js, Django, Flask</p>
+        <h4>Backend</h4>
+        <p>Rails, Express.js, Node.js, Django, Flask</p>
       </div>
       <div class="skill-block">
         <h4>Frontend</h4>
         <p>Vue.js, HTML5, CSS3</p>
       </div>
       <div class="skill-block">
-        <h4>Databases &amp; Storage</h4>
+        <h4>Databases</h4>
         <p>MySQL, MongoDB, Redis, Elasticsearch</p>
       </div>
       <div class="skill-block">
@@ -256,8 +350,8 @@
         <p>Apache Kafka, GraphQL, REST</p>
       </div>
       <div class="skill-block">
-        <h4>Architecture &amp; AI</h4>
-        <p>Microservices, Event-Driven, Platform Engineering, Hermes, Claude Code, OpenCode</p>
+        <h4>Architecture</h4>
+        <p>Microservices, Event-Driven, Platform Eng, RFC Authoring, Mentoring</p>
       </div>
     </div>
   </div>
