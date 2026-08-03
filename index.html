@@ -724,9 +724,161 @@
     font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:rgba(207,201,189,.5);
   }
   .game-info span strong{color:var(--ember);font-weight:700}
+
+  /* ── OPENING CRAWL ── */
+  .crawl-overlay{
+    position:fixed;inset:0;z-index:9999;
+    background:#000;
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+    transition:opacity .6s ease;
+  }
+  .crawl-overlay.fade-out{
+    opacity:0;pointer-events:none;
+  }
+  .crawl-overlay.done{
+    display:none;
+  }
+
+  /* "A long time ago..." */
+  .crawl-intro{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    opacity:0;
+    animation:crawlIntroFade 3.5s ease forwards 0.3s;
+  }
+  .crawl-intro p{
+    font-size:clamp(1rem,2.5vw,1.8rem);
+    color:#4bd5ee;
+    font-family:'JetBrains Mono',monospace;
+    letter-spacing:.15em;
+    text-align:center;
+  }
+  @keyframes crawlIntroFade{
+    0%{opacity:0}
+    15%{opacity:1}
+    80%{opacity:1}
+    100%{opacity:0}
+  }
+
+  /* Logo */
+  .crawl-logo{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    opacity:0;
+    animation:crawlLogo 5s ease forwards 3.8s;
+  }
+  .crawl-logo svg{
+    width:min(500px,75vw);
+    filter:drop-shadow(0 0 30px rgba(255,215,0,.6)) drop-shadow(0 0 60px rgba(255,180,0,.3));
+  }
+  @keyframes crawlLogo{
+    0%{opacity:0;transform:scale(2.5)}
+    8%{opacity:1;transform:scale(1)}
+    85%{opacity:1;transform:scale(1)}
+    100%{opacity:0;transform:scale(0.1)}
+  }
+
+  /* Crawl text perspective */
+  .crawl-perspective{
+    position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+    width:min(800px,90vw);
+    perspective:350px;
+    opacity:0;
+    animation:crawlReveal .6s ease forwards 8.8s;
+  }
+  @keyframes crawlReveal{
+    from{opacity:0}
+    to{opacity:1}
+  }
+
+  .crawl-text{
+    text-align:center;
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    font-size:clamp(1.4rem,3.5vw,3rem);
+    line-height:1.6;
+    color:#ffd700;
+    transform:rotateX(22deg) translateY(100%);
+    animation:crawlScroll 28s linear forwards 9.4s;
+  }
+  .crawl-text .crawl-title{
+    font-size:clamp(1.8rem,4.5vw,3.6rem);
+    font-weight:900;
+    letter-spacing:.05em;
+    margin-bottom:.7em;
+    color:#ffe81f;
+    text-shadow:0 0 40px rgba(255,215,0,.5);
+  }
+  .crawl-text p{
+    margin-bottom:1.1em;
+    color:#ffeaa7;
+    letter-spacing:.02em;
+    text-shadow:0 0 15px rgba(255,200,50,.3);
+  }
+  @keyframes crawlScroll{
+    0%{transform:rotateX(22deg) translateY(100%)}
+    100%{transform:rotateX(22deg) translateY(-180%)}
+  }
+
+  /* Skip button */
+  .crawl-skip{
+    position:fixed;bottom:32px;right:32px;z-index:10000;
+    font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:.25em;
+    color:rgba(207,201,189,.35);background:transparent;border:1px solid rgba(207,201,189,.15);
+    padding:10px 18px;cursor:pointer;
+    transition:all .3s ease;
+    opacity:0;
+    animation:fadeIn .5s ease forwards 2s;
+  }
+  .crawl-skip:hover{
+    color:var(--bone);border-color:var(--ember);
+    box-shadow:0 0 16px rgba(255,42,42,.3);
+  }
+  .crawl-overlay.fade-out .crawl-skip{display:none}
+
+  @media(max-width:768px){
+    .crawl-perspective{perspective:250px}
+    .crawl-text{font-size:1rem;animation-duration:22s}
+    .crawl-text .crawl-title{font-size:1.4rem}
+    .crawl-skip{bottom:20px;right:16px;font-size:8px;padding:8px 14px}
+  }
 </style>
 </head>
 <body>
+
+<!-- ── OPENING CRAWL ── -->
+<div class="crawl-overlay" id="crawl-overlay">
+  <div class="crawl-intro">
+    <p>A long time ago in a galaxy far,<br>far away....</p>
+  </div>
+
+  <div class="crawl-logo">
+    <svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="logoGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ffe81f"/>
+          <stop offset="50%" stop-color="#ffd700"/>
+          <stop offset="100%" stop-color="#b8860b"/>
+        </linearGradient>
+      </defs>
+      <text x="50%" y="80" text-anchor="middle" font-family="'Cinzel',serif" font-weight="900" font-size="72" fill="url(#logoGrad)" letter-spacing="6">RENDYTIO</text>
+      <text x="50%" y="150" text-anchor="middle" font-family="'Cinzel',serif" font-weight="700" font-size="28" fill="#cfc9bd" letter-spacing="14">SOFTWARE ENGINEER</text>
+      <line x1="60" y1="175" x2="440" y2="175" stroke="#ff1a1a" stroke-width="1" opacity="0.6"/>
+      <line x1="80" y1="180" x2="420" y2="180" stroke="#ff1a1a" stroke-width="0.5" opacity="0.3"/>
+    </svg>
+  </div>
+
+  <div class="crawl-perspective">
+    <div class="crawl-text">
+      <div class="crawl-title">EPISODE VII</div>
+      <p>THE RISE OF THE BACKEND</p>
+      <p>It is a period of digital transformation. From the outer rim territories of West Java, a software engineer has spent seven years mastering the ancient arts of distributed systems.</p>
+      <p>Armed with Ruby on Rails, Node.js, and the power of Apache Kafka, he architects subscription platforms, data sync pipelines, and marketplace systems at Mekari — bending chaos into shipped code.</p>
+      <p>Now augmented by AI agents and custom Claude Code skills, he seeks new challenges across the galaxy. His mission: to build platforms that do not blink under pressure, and to prove that the ability to ship code is insignificant next to the power of a well-designed platform....</p>
+    </div>
+  </div>
+
+  <button class="crawl-skip" id="crawl-skip">SKIP ▸</button>
+</div>
 
 <div class="scroll-progress" id="scroll-progress"></div>
 <div class="starfield">
@@ -1760,6 +1912,38 @@ document.getElementById('footer-year').textContent = new Date().getFullYear();
   closeBtn.addEventListener('click', closeGame);
   overlay.addEventListener('click', e=>{ if(e.target === overlay) closeGame(); });
   document.addEventListener('keydown', e=>{ if(e.key === 'Escape' && overlay.classList.contains('active')) closeGame(); });
+})();
+</script>
+
+<!-- ── CRAWL CONTROLLER ── -->
+<script>
+(function(){
+  const overlay = document.getElementById('crawl-overlay');
+  const skipBtn = document.getElementById('crawl-skip');
+  if(!overlay) return;
+
+  let done = false;
+
+  function hideCrawl(){
+    if(done) return;
+    done = true;
+    overlay.classList.add('fade-out');
+    // Remove completely after transition
+    setTimeout(() => { overlay.classList.add('done'); }, 700);
+  }
+
+  // Auto-hide after crawl animation completes (~38 seconds)
+  setTimeout(hideCrawl, 38500);
+
+  // Skip button
+  skipBtn.addEventListener('click', hideCrawl);
+
+  // Also allow pressing any key to skip (but not during the first 1.5s to avoid accidental skip)
+  let keyReady = false;
+  setTimeout(() => { keyReady = true; }, 1500);
+  document.addEventListener('keydown', function(e){
+    if(!done && keyReady && e.key !== 'Escape') hideCrawl();
+  }, {once:true});
 })();
 </script>
 </body>
