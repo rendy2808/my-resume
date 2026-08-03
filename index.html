@@ -264,17 +264,9 @@
     100%{top:100%;opacity:0}
   }
 
-  .hud-readout{
-    position:absolute;bottom:80px;right:52px;
-    font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;
-    color:rgba(255,42,42,.4);text-align:right;line-height:1.8;z-index:4;
-    animation:fadeIn .5s ease forwards 2.5s;opacity:0;
-  }
-  .hud-readout .val{color:rgba(255,42,42,.65)}
-
   .sentinel-frame{
     position:absolute;right:5%;top:50%;transform:translateY(-50%);
-    width:min(520px,42vw);aspect-ratio:1/1.15;z-index:1;pointer-events:none;opacity:.95;
+    width:min(380px,30vw);aspect-ratio:1/1.15;z-index:1;pointer-events:none;opacity:.95;
     animation:sentinelBreathe 5.5s ease-in-out infinite;
   }
   @keyframes sentinelBreathe{
@@ -415,7 +407,6 @@
     .hero{padding:110px 24px 80px}
     .sentinel-frame,.red-glow-orb{display:none}
     .hud-corner{display:none}
-    .hud-readout{display:none}
     .hero-side{margin-top:40px}
   }
 
@@ -798,7 +789,7 @@
     line-height:1.6;
     color:#ffd700;
     transform:rotateX(22deg) translateY(100%);
-    animation:crawlScroll 28s linear forwards 9.4s;
+    animation:crawlScroll 18s linear forwards 9.4s;
   }
   .crawl-text .crawl-title{
     font-size:clamp(1.8rem,4.5vw,3.6rem);
@@ -871,9 +862,8 @@
     <div class="crawl-text">
       <div class="crawl-title">EPISODE VII</div>
       <p>THE RISE OF THE BACKEND</p>
-      <p>It is a period of digital transformation. From the outer rim territories of West Java, a software engineer has spent seven years mastering the ancient arts of distributed systems.</p>
-      <p>Armed with Ruby on Rails, Node.js, and the power of Apache Kafka, he architects subscription platforms, data sync pipelines, and marketplace systems at Mekari — bending chaos into shipped code.</p>
-      <p>Now augmented by AI agents and custom Claude Code skills, he seeks new challenges across the galaxy. His mission: to build platforms that do not blink under pressure, and to prove that the ability to ship code is insignificant next to the power of a well-designed platform....</p>
+      <p>From the outer rim of West Java, a polyglot engineer has spent seven years bending Ruby, Node.js, and Kafka to his will — architecting subscription, data sync, and marketplace platforms at Mekari.</p>
+      <p>Now augmented by AI agents, he seeks new challenges across the galaxy. The ability to ship code is insignificant next to the power of a well-designed platform....</p>
     </div>
   </div>
 
@@ -920,13 +910,6 @@
   <div class="hud-corner bl"></div>
   <div class="hud-corner br"></div>
   <div class="hud-scan"></div>
-
-  <div class="hud-readout">
-    <div>LAT <span class="val">-6.9175°</span></div>
-    <div>LNG <span class="val">107.6191°</span></div>
-    <div>SECTOR <span class="val">VII-B</span></div>
-    <div>UTC <span class="val" id="hud-time">--:--:--</span></div>
-  </div>
 
   <div class="red-glow-orb"></div>
 
@@ -1036,9 +1019,8 @@
     </div>
 
     <p class="hero-tagline">
-      Architect of subscription, data sync, and marketplace platforms at Mekari.
-      Polyglot across Ruby, Node.js, and Vue. I lead initiatives end-to-end —
-      from RFC to delivery — and weaponize AI agents to bend the development cycle to my will.
+      Architecting subscription, data sync &amp; marketplace platforms at Mekari.
+      Polyglot across Ruby, Node.js, Vue — I own initiatives RFC-to-delivery and weaponize AI agents to bend the dev cycle.
     </p>
 
     <div class="hero-cta">
@@ -1424,18 +1406,6 @@
   }
   window.addEventListener('scroll', update, {passive:true});
   update();
-})();
-
-/* ── HUD CLOCK ── */
-(function(){
-  const el = document.getElementById('hud-time');
-  if(!el) return;
-  function tick(){
-    const n = new Date();
-    el.textContent = n.toUTCString().slice(17,25);
-  }
-  tick();
-  setInterval(tick, 1000);
 })();
 
 /* ── TYPEWRITER ── */
