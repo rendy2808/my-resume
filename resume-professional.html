@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rendytio Arifian Puspito — Resume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1a1a2e;
+    --text-secondary: #4a4a6a;
+    --accent: #2563eb;
+    --border: #e5e7eb;
+    --tag-bg: #f3f4f6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #f8fafc;
+    color: var(--text);
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+  .page {
+    width: 210mm; height: 297mm;
+    background: var(--bg);
+    padding: 11mm 15mm 9mm;
+    box-shadow: 0 4px 24px rgba(0,0,0,.08);
+    display: flex; flex-direction: column;
+    gap: 3.2mm;
+  }
+  /* ── HEADER ── */
+  .header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding-bottom: 2.5mm;
+    border-bottom: 2px solid var(--accent);
+  }
+  .header-left h1 {
+    font-size: 21pt; font-weight: 800; letter-spacing: -.02em;
+    color: var(--text); line-height: 1.08;
+  }
+  .header-left .role {
+    font-size: 9pt; font-weight: 600; color: var(--accent);
+    letter-spacing: .05em; text-transform: uppercase; margin-top: 1.5mm;
+  }
+  .header-right {
+    text-align: right; font-size: 8pt; color: var(--text-secondary);
+    line-height: 1.6; flex-shrink: 0;
+  }
+  .header-right a { color: var(--text-secondary); text-decoration: none; }
+  .header-right .sep { color: var(--border); margin: 0 3px; }
+
+  /* ── SECTIONS ── */
+  .section { display: flex; flex-direction: column; gap: 2mm; }
+  .section-title {
+    font-size: 8.5pt; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .12em; color: var(--accent);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-title::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+  .summary-text {
+    font-size: 8.8pt; color: var(--text-secondary); line-height: 1.5;
+  }
+
+  /* ── EXPERIENCE ── */
+  .exp-item {
+    display: grid; grid-template-columns: 30mm 1fr; gap: 3.5mm;
+    padding-bottom: 2.5mm;
+  }
+  .exp-item:not(:last-child) {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2.8mm; margin-bottom: 0.3mm;
+  }
+  .exp-meta {
+    font-size: 7.5pt; color: var(--text-secondary); line-height: 1.45;
+  }
+  .exp-meta .company { font-weight: 700; font-size: 8.8pt; color: var(--text); display: block; }
+  .exp-meta .date {
+    display: block; margin-top: .3mm;
+    font-family: 'JetBrains Mono', monospace; font-size: 7pt; letter-spacing: .02em;
+  }
+  .exp-body h3 {
+    font-size: 9.5pt; font-weight: 700; margin-bottom: 1.5mm; color: var(--text);
+  }
+  .exp-body ul { list-style: none; padding: 0; }
+  .exp-body li {
+    font-size: 8.2pt; color: var(--text-secondary); line-height: 1.45;
+    padding-left: 10px; position: relative; margin-bottom: 0.8mm;
+  }
+  .exp-body li::before {
+    content: "▸"; position: absolute; left: 0; top: 0;
+    color: var(--accent); font-size: 6pt; line-height: 1.4;
+  }
+  .exp-body .award {
+    display: inline-block; font-size: 7pt; font-weight: 600;
+    color: #b45309; background: #fffbeb; border: 1px solid #fde68a;
+    padding: 1px 5px; border-radius: 3px; margin-bottom: 1.5mm;
+  }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 2.5px; margin-top: 1.5mm; }
+  .tag {
+    font-family: 'JetBrains Mono', monospace; font-size: 6.5pt;
+    padding: 1.5px 5px; background: var(--tag-bg);
+    border-radius: 3px; color: var(--text-secondary); letter-spacing: .02em;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.2mm; }
+  .skill-block h4 {
+    font-size: 7.5pt; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .05em; color: var(--text); margin-bottom: 1mm;
+  }
+  .skill-block p {
+    font-size: 7.8pt; color: var(--text-secondary); line-height: 1.45;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; width: 100%; height: auto; padding: 8mm 12mm 6mm; }
+  }
+  @media screen and (max-width: 800px) {
+    .page { width: 100%; height: auto; padding: 8mm; }
+    .exp-item { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .header { flex-direction: column; gap: 2mm; }
+    .header-right { text-align: left; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <h1>Rendytio Arifian Puspito</h1>
+      <div class="role">Software Engineer · Backend &amp; Platform</div>
+    </div>
+    <div class="header-right">
+      <div>West Java, Indonesia · UTC+7</div>
+      <div>
+        <a href="mailto:rendytio.arifian@gmail.com">rendytio.arifian@gmail.com</a>
+        <span class="sep">|</span>
+        <a href="https://github.com/rendy2808">github/rendy2808</a>
+        <span class="sep">|</span>
+        <a href="https://linkedin.com/in/rendytio-arifian-puspito">linkedin</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="section">
+    <div class="section-title">Professional Summary</div>
+    <p class="summary-text">
+      Results-driven Software Engineer with <strong>7+ years</strong> of experience architecting backend systems across <strong>SaaS, F&amp;B retail, and on-demand logistics</strong>. Currently Person-In-Charge at Mekari, leading cross-functional initiatives from RFC to delivery. Proven track record delivering subscription platforms, real-time data sync pipelines, and marketplace systems at enterprise scale. <strong>AI integration specialist</strong> — orchestrating autonomous agents (Hermes, Claude Code, OpenCode) to accelerate development velocity.
+    </p>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="section">
+    <div class="section-title">Experience</div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <span class="company">Mekari</span>
+        Jakarta, Indonesia
+        <span class="date">Jan 2021 — Present</span>
+      </div>
+      <div class="exp-body">
+        <h3>Software Engineer — Subscription, Data Sync &amp; Marketplace</h3>
+        <span class="award">★ 2022 Customer First Awardee</span>
+        <ul>
+          <li>Architect and maintain the <strong>Subscription Platform</strong> powering Mekari's product suite, serving Finance as direct stakeholders.</li>
+          <li>Own the <strong>Data Sync Platform</strong> feeding CRM, customer engagement, and support systems with real-time event streams.</li>
+          <li>Maintain the <strong>Partners &amp; Marketplace</strong> platform enabling third-party integrations and service discovery.</li>
+          <li>Act as <strong>Person-In-Charge</strong> for cross-functional initiatives — RFC authoring, stakeholder alignment, task decomposition, multi-team delivery.</li>
+          <li>Lead <strong>AI integration</strong> — orchestrating agents via Hermes, authoring custom skills for Claude Code &amp; OpenCode adopted by the team.</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag">Ruby on Rails</span><span class="tag">Vue.js</span><span class="tag">MySQL</span>
+          <span class="tag">MongoDB</span><span class="tag">Kafka</span><span class="tag">Redis</span>
+          <span class="tag">GraphQL</span><span class="tag">Hermes</span><span class="tag">Claude Code</span><span class="tag">OpenCode</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <span class="company">Fore Coffee</span>
+        Jakarta, Indonesia
+        <span class="date">Jan 2020 — Jan 2021</span>
+      </div>
+      <div class="exp-body">
+        <h3>Backend Engineer — Mobile App &amp; Point-of-Sale</h3>
+        <ul>
+          <li>Built and maintained the <strong>core backend</strong> for Fore Coffee's mobile application and in-store POS infrastructure.</li>
+          <li>Integrated <strong>5+ payment gateways</strong> — Jenius, OVO, Midtrans (GoPay), ShopeePay, Xendit — ensuring reliable transactions at scale.</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">MySQL</span>
+          <span class="tag">Redis</span><span class="tag">Elasticsearch</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <span class="company">Triplogic</span>
+        Jakarta, Indonesia
+        <span class="date">Feb 2019 — Dec 2019</span>
+      </div>
+      <div class="exp-body">
+        <h3>Backend Engineer — On-Demand Logistics</h3>
+        <ul>
+          <li>Led and mentored <strong>3 Junior Backend Engineers</strong> — technical direction, code reviews, engineering best practices.</li>
+          <li>Designed and shipped the core <strong>on-demand logistics platform</strong> backend.</li>
+          <li>Delivered dedicated backends for: coffee logistics (<strong>Fore Coffee</strong>), luggage delivery (<strong>Traveloka</strong>), and event locker services (<strong>YouTube Indonesia</strong>).</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag">Node.js</span><span class="tag">Python</span><span class="tag">Django</span>
+          <span class="tag">Flask</span><span class="tag">Microservices</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="section">
+    <div class="section-title">Technical Skills</div>
+    <div class="skills-grid">
+      <div class="skill-block">
+        <h4>Languages</h4>
+        <p>Ruby, JavaScript, TypeScript, Python, SQL</p>
+      </div>
+      <div class="skill-block">
+        <h4>Backend Frameworks</h4>
+        <p>Ruby on Rails, Express.js, Node.js, Django, Flask</p>
+      </div>
+      <div class="skill-block">
+        <h4>Frontend</h4>
+        <p>Vue.js, HTML5, CSS3</p>
+      </div>
+      <div class="skill-block">
+        <h4>Databases &amp; Storage</h4>
+        <p>MySQL, MongoDB, Redis, Elasticsearch</p>
+      </div>
+      <div class="skill-block">
+        <h4>Messaging &amp; APIs</h4>
+        <p>Apache Kafka, GraphQL, REST</p>
+      </div>
+      <div class="skill-block">
+        <h4>Architecture &amp; AI</h4>
+        <p>Microservices, Event-Driven, Platform Engineering, Hermes, Claude Code, OpenCode</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
